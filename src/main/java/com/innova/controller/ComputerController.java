@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.swing.*;
 import java.util.Optional;
 
 @Controller
@@ -82,7 +81,7 @@ public class ComputerController {
         if(optionalComputerEntity.isPresent()){
             ComputerEntity computerEntity = optionalComputerEntity.get();
             computerRepository.deleteById(myId);
-            return "Silindi - " + computerEntity.toString();
+            return "Silindi - " + computerEntity;
         }
         else{
             return "Kayıt silinemedi";
@@ -108,7 +107,7 @@ public class ComputerController {
             computerEntity.setComputerTrade(computerTrade);
             computerEntity.setComputerPrice(computerPrice);
             computerRepository.save(computerEntity);
-            return "Güncellendi - " + computerEntity.toString();
+            return "Güncellendi - " + computerEntity;
         }
         else{
             return "Kayıt bulunamadı";
