@@ -1,7 +1,9 @@
 package com.innova.controller;
 
 import com.innova.entity.ComputerEntity;
-import com.innova.repository.ComputerRepository;
+import com.innova.repository.IComputerRepository;
+import com.innova.repository.IMyRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Optional;
 
+@Log4j2
 @Controller
 public class ComputerController {
 
     @Autowired
-    ComputerRepository computerRepository;
+    IComputerRepository computerRepository;
 
     //http://localhost:8090/computer/create
     @GetMapping("/computer/create")
@@ -24,7 +27,7 @@ public class ComputerController {
         //String computerName = JOptionPane.showInputDialog("Bilgisayar Adı giriniz");
         String computerName = "computerName44";
         String computerTrade = "computerTrade44";
-        String computerPrice = "computerPrice44";
+        double computerPrice = 44;
 
         ComputerEntity computerEntity = ComputerEntity.builder()
                 .computerId(0L)
@@ -42,7 +45,7 @@ public class ComputerController {
     public String getCreateComputerRequestParam(
             @RequestParam(name="computer_name") String computerName,
             @RequestParam(name="computer_trade") String computerTrade,
-            @RequestParam(name="computer_price") String computerPrice
+            @RequestParam(name="computer_price") double computerPrice
 
     ){
         ComputerEntity computerEntity = ComputerEntity.builder()
@@ -95,7 +98,7 @@ public class ComputerController {
             @PathVariable(name="id") Long myId,
             @RequestParam(name="computer_name") String computerName,
             @RequestParam(name="computer_trade") String computerTrade,
-            @RequestParam(name="computer_price") String computerPrice
+            @RequestParam(name="computer_price") double computerPrice
 
     ){
 
@@ -113,4 +116,55 @@ public class ComputerController {
             return "Kayıt bulunamadı";
         }
     }
+
+    //Select
+    //http://localhost:8090/computer/select/findAll
+    @GetMapping("/computer/select/findAll")
+    @ResponseBody
+    public String getComputerSelectAll(){
+        var iterableList = computerRepository.findAll();
+
+        for(var item: iterableList){
+            log.info(item);
+        }
+        return iterableList.toString();
+    }
+
+    //Select
+    //http://localhost:8090/computer/select/findAll/spessific/computerName66
+    @GetMapping("/computer/select/findAll/spessific/{computer_name}")
+    @ResponseBody
+    public String getComputerSelectAllSpessific(
+            @PathVariable(name="computer_name") String computerName
+    ){
+        var iterableList = computerRepository
+                .findComputerEntitiesByComputerName(computerName);
+
+        for(var item: iterableList){
+            log.info(item);
+        }
+        return iterableList.toString();
+    }
+
+    //Kendi repositoryimizi kullanalım
+    //computerRepository'e implement ettik
+    @Autowired
+    IMyRepository myRepository;
+
+    //Select
+    //http://localhost:8090/computer/select/minPrice/66
+    @GetMapping("/computer/select/minPrice/{price}")
+    @ResponseBody
+    public String getComputerSelectMinPrice(
+            @PathVariable(name="price") double price
+    ){
+        var iterableList = myRepository
+                .findComputerPriceMin(price);
+
+        for(var item: iterableList){
+            log.info(item);
+        }
+        return iterableList.toString() + "\n";
+    }
+
 }

@@ -31,7 +31,7 @@ public class ComputerEntity implements Serializable {
 
     //@Column(name = "computer_price",columnDefinition = "Decimal(10,2) default='100.00'")
     @Column(name = "computer_price")
-    private String computerPrice;
+    private double computerPrice;
 
     @Column(name="computer_serial_number",length = 11,nullable = false,unique = true)
     private int serialComputerNumber;
