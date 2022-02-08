@@ -1,0 +1,125 @@
+<!doctype html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../static.css/style.css">
+     <link rel="stylesheet" th:href="@{/css/style.css}">-->
+</head>
+<body>
+<!--start codes-->
+
+<!--
+th:action= getMapping
+th:object= model key
+th:field = model attribute
+
+-->
+
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p th:if="${isUserFormReadOnly}"
+                                   class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Mesaj Görüntüle</p>
+                                <p th:if="${isUserFormReadOnly != true and user_key.userId == null}"
+                                   class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Mesaj Oluştur</p>
+                                <p th:if="${isUserFormReadOnly != true and user_key.userId != null}"
+                                   class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Mesaj Düzenle</p>
+
+                                <form th:action="${user_key.userId} == null ? '/user/createForm' : '/user/updateForm'"
+                                      th:method="post"
+                                      th:object="${user_key}">
+
+                                    <fieldset th:disabled="${isUserFormReadOnly eq true}" >
+                                        <div class="container">
+                                            <div class="row">
+                                                <div th:text="#{userName}" class="col-md-3 label"></div>
+                                                <div class="col-md-9 form-group">
+                                                    <input th:field="*{userName}" type="text" class="form-control"
+                                                           autofocus>
+                                                    <div th:if="${#fields.hasErrors('userName')}"
+                                                         th:errors="*{userName}"></div>
+                                                </div>
+
+                                                <div th:text="#{userSurname}" class="col-md-3"></div>
+                                                <div class="col-md-9 form-group">
+                                                    <input th:field="*{userSurname}" type="text" class="form-control"
+                                                           autofocus>
+                                                    <div th:if="${#fields.hasErrors('userSurname')}"
+                                                         th:errors="*{userSurname}"></div>
+                                                </div>
+
+                                                <div th:text="#{emailAddress}" class="col-md-3"></div>
+                                                <div class="col-md-9 form-group">
+                                                    <input th:field="*{emailAddress}" type="text" class="form-control"
+                                                           autofocus>
+                                                    <div th:if="${#fields.hasErrors('emailAddress')}"
+                                                         th:errors="*{emailAddress}"></div>
+                                                </div>
+
+                                                <div th:text="#{userAge}" class="col-md-3"></div>
+                                                <div class="col-md-9 form-group">
+                                                    <input th:field="*{userAge}" type="text" class="form-control"
+                                                           autofocus>
+                                                    <div th:if="${#fields.hasErrors('userAge')}"
+                                                         th:errors="*{userAge}"></div>
+                                                </div>
+
+                                                <div th:text="#{userMessage}" class="col-md-3"></div>
+                                                <div class="col-md-9 form-group">
+                                                    <input th:field="*{userMessage}" type="text" class="form-control"
+                                                           autofocus>
+                                                    <div th:if="${#fields.hasErrors('userMessage')}"
+                                                         th:errors="*{userMessage}"></div>
+                                                </div>
+
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-9 form-group">
+                                                    <input th:if="${user_key.userId == null}" type="reset"
+                                                           class="btn btn-danger" style="background-color: #af500f"
+                                                           value="Temizle">
+                                                    <a th:if="${user_key.userId} != null" type="button"
+                                                           class="btn btn-danger"
+                                                       th:href="'/user/deleteUser/'+ ${user_key.userId}">Sil</a>
+                                                    <input type="submit" class="btn btn-primary"
+                                                           th:value="${user_key.userId} != null ? 'Güncelle' : 'Ekle'">
+                                                </div>
+
+                                                <input th:field="*{userId}" type="hidden">
+
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                     class="img-fluid" alt="Sample image">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--end codes-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -13,7 +13,9 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @Builder
 @Log4j2
-public class InnovaValidationDto {
+public class UserDto {
+
+    private Long userId;
 
     @NotEmpty(message = "Ad alanını boş geçemezsiniz")
     private String userName;
