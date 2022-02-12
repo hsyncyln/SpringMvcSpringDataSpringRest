@@ -154,4 +154,16 @@ public class ProductServicesController {
         return "Update Success ! HttpEntity bir hata varsa almak icin: "+productDto2;
     }
 
+    ///////////
+    //DELETE
+    // http://localhost:8090/client/controller/delete/1
+    @GetMapping("/client/controller/delete/{id}")
+    @ResponseBody
+    public String  deleteProduct(@PathVariable(name="id") Long id) {
+        String URL = "http://localhost:8090/delete/productdto/" + id;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.exchange(URL,HttpMethod.DELETE,HttpEntity.EMPTY,Void.class);
+        return "Silindi";
+    }
+
 }

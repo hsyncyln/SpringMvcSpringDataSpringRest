@@ -58,4 +58,12 @@ public class ProductService {
         //database
         return  productDto;
     }
+
+    ///////////////////////
+    //DELETE
+
+    @DeleteMapping("delete/productdto/{id}")
+    public void deleteProduct(@PathVariable("id") Long id){
+        log.info("RestController -> Silinen dto id'si : " + id);
+    }
 }
