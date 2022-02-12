@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
+@RequestMapping("/rest")
 @RestController
 public class PostmanService {
 
     //http://localhost:8090/rest/postman/dynamicJson
-    @GetMapping("/rest/postman/dynamicJson")
+    @GetMapping("/postman/dynamicJson")
     public ProductDto getDynamicJson(){
 
         ProductDto productDto = new ProductDto().builder()
@@ -23,7 +24,7 @@ public class PostmanService {
         return productDto;
     }
     //http://localhost:8090/rest/postman/mediatype
-    @GetMapping(value = "/rest/postman/mediatype",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/postman/mediatype",produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDto getMediaType(){
 
         ProductDto productDto = new ProductDto().builder()
@@ -34,7 +35,7 @@ public class PostmanService {
     }
 
     //http://localhost:8090/rest/postman/pathvariable/kitap
-    @GetMapping(value = "/rest/postman/pathvariable/{urunAdi}")
+    @GetMapping(value = "/postman/pathvariable/{urunAdi}")
     public ProductDto getPathVariable(
             @PathVariable("urunAdi") String urunAdi
     ){
@@ -47,7 +48,7 @@ public class PostmanService {
     }
 
     //http://localhost:8090/rest/postman/productlist
-    @GetMapping(value = "/rest/postman/productlist")
+    @GetMapping(value = "/postman/productlist")
     public List<ProductDto> getProductList(){
 
         List<ProductDto> productDtoList = new ArrayList<>();
@@ -71,7 +72,7 @@ public class PostmanService {
 //    org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported
 //
     //http://localhost:8090/rest/post/postman
-    @PostMapping(value = "/rest/post/postman")
+    @PostMapping(value = "/post/postman")
     public ProductDto postProduct(ProductDto productDto){
         ProductDto productDto1 = productDto;
         log.info(productDto1);
@@ -85,7 +86,7 @@ public class PostmanService {
 //    org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported
 
     //http://localhost:8090/rest/put/postman
-    @PutMapping(value = "/rest/put/postman")
+    @PutMapping(value = "/put/postman")
     public ProductDto updateProduct(ProductDto productDto){
         ProductDto productDto1 = productDto;
         log.info(productDto1);
@@ -95,7 +96,7 @@ public class PostmanService {
     /////////// DELETE /////////////
 
     //http://localhost:8090/rest/delete/postman/2
-    @DeleteMapping(value = "/rest/delete/postman/{id}")
+    @DeleteMapping(value = "/delete/postman/{id}")
     public void deleteProduct(@PathVariable(name="id") Long id){
         log.info( id + " -> id silindi");
     }
