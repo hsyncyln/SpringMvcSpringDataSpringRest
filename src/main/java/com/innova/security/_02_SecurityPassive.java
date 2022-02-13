@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 //@EnableWebSecurity
 public class _02_SecurityPassive extends WebSecurityConfigurerAdapter {
 
+    //Authantication için popup açıldı ancak username ve password olmadığı için giriş yapılamadı
+    //httpbasic -> popup'ta açılmasını sağlar
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 

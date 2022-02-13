@@ -116,7 +116,7 @@ public class ProductServicesController {
 
         String URL = "http://localhost:8090/post/productDto";
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(URL,productDto,ProductDto.class);
+        ProductDto product = restTemplate.postForObject(URL,productDto,ProductDto.class);
 
         return "Success !";
     }
