@@ -22,7 +22,11 @@ public class _10_Login extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/security/private")
-                .and();
+                .and()
+                .logout()
+                .logoutSuccessUrl("/logout")
+                .invalidateHttpSession(true)
+                .permitAll();
     }
 
 
